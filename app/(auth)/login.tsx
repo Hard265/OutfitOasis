@@ -15,7 +15,7 @@ export default function LoginPage() {
   const passwordRef = useRef<TextInput>(null)
 
   const handleLogin = () => {
-    login({ token: 'xxxxxx' })
+    login({ token: 'xxxxxx', email: form.email, username: form.email })
     router.replace('/(app)/(tabs)/products')
   }
 
@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   return (
     <View className="flex-1 bg-white dark:bg-black p-4 justify-center">
-      <View className="mt-32">
+      <View className="mt-8">
         <Text className="text-lg font-semibold mt-2 dark:text-white">
           Email address
         </Text>

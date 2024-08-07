@@ -4,6 +4,8 @@ import { createContext, PropsWithChildren } from 'react'
 
 interface Session {
   token: string
+  email: string
+  username: string
 }
 
 export const SessionContext = createContext<{

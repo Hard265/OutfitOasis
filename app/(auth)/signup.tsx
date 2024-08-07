@@ -25,7 +25,7 @@ export default function SignupPage() {
   const password2Ref = useRef<TextInput>(null)
 
   const handleSignup = () => {
-    login({ token: 'xxxxxx' })
+    login({ token: 'xxxxxx', email: form.email, username: form.username })
     router.replace('/(app)/(tabs)/products')
   }
 

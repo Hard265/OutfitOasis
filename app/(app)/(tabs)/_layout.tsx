@@ -35,12 +35,20 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
-        name="search"
+        name="search/index"
         options={{
           title: 'Search',
           tabBarIcon: (props) => (
             <Feather color={props.color} name="search" size={props.size} />
           )
+        }}
+      />
+
+      <Tabs.Screen
+        name="search/filter"
+        options={{
+          title: 'Filters',
+          href: null
         }}
       />
       <Tabs.Screen
