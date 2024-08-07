@@ -11,5 +11,6 @@ export function useTheme() {
     return {
         backgroundColor,
         onbackgroundColor,
+        isDark
     }
 }

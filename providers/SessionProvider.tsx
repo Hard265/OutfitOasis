@@ -1,23 +1,47 @@
-import { router } from "expo-router";
-import { createContext, PropsWithChildren } from "react";
+import { useStorageState } from '@/hooks/useStorageState'
+import { router } from 'expo-router'
+import { createContext, PropsWithChildren } from 'react'
+
+interface Session {
+  token: string
+}
 
 export const SessionContext = createContext<{
-    logout: () => void
+  login(data: Session): void
+  logout(): void
+  loading: boolean
+  session: Session | null
 }>({
-    logout() { },
+  login() {},
+  logout() {},
+  session: null,
+  loading: true
 })
 
 export default function SessionProvider(props: PropsWithChildren) {
+  const [[loading, session], setSession] = useStorageState('session')
 
-    const logout = () => {
-        router.replace("/login")
-    }
+  const sess = session ? (JSON.parse(session) as Session) : null
 
-    return (
-        <SessionContext.Provider value={{
-            logout
-        }}>
-            {props.children}
-        </SessionContext.Provider>
-    )
+  const login = (data: Session) => {
+    setSession(JSON.stringify(data))
+  }
+
+  const logout = () => {
+    setSession(null)
+    router.replace('/login')
+  }
+
+  return (
+    <SessionContext.Provider
+      value={{
+        session: sess,
+        login,
+        logout,
+        loading
+      }}
+    >
+      {props.children}
+    </SessionContext.Provider>
+  )
 }
