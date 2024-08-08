@@ -5,6 +5,7 @@ import React, {
   PropsWithChildren
 } from 'react'
 import NetInfo from '@react-native-community/netinfo'
+import Snackbar from '@/components/Snackbar'
 
 interface NetworkContextType {
   isConnected: boolean | null
@@ -21,6 +22,7 @@ export function NetworkProvider({ children }: PropsWithChildren) {
     isConnected: false,
     isInternetReachable: false
   })
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
@@ -28,12 +30,20 @@ export function NetworkProvider({ children }: PropsWithChildren) {
         isConnected: state.isConnected,
         isInternetReachable: state.isInternetReachable
       })
+      setMessage(
+        state.isConnected
+          ? 'Connected to the internet'
+          : 'No internet connection'
+      )
     })
 
     return () => unsubscribe()
   }, [])
 
   return (
-    <NetworkContext.Provider value={status}>{children}</NetworkContext.Provider>
+    <NetworkContext.Provider value={status}>
+      {children}
+      <Snackbar message={message} duration={3000} />
+    </NetworkContext.Provider>
   )
 }

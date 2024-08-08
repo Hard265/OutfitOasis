@@ -20,12 +20,12 @@ const links: {
   {
     name: 'Edit Profile',
     icon: 'edit-3',
-    href: '/(app)/(tabs)/profile/edit'
+    href: '/(app)/tabs/profile/edit'
   },
   {
     name: 'My Orders',
     icon: 'shopping-cart',
-    href: '/(app)/(tabs)/orders'
+    href: '/(app)/tabs/orders'
   },
   {
     name: 'Notifications',
@@ -74,21 +74,6 @@ export default function ProfilePage() {
       >
         <Text className="text-red-100 font-semibold">Logout</Text>
       </TouchableOpacity>
-      <Tabs.Screen
-        options={{
-          headerRight(props) {
-            return (
-              <View className="flex-row gap-2 px-4">
-                <Link href="/(app)/(tabs)/profile/edit" asChild push>
-                  <TouchableOpacity>
-                    <Feather name="edit-3" color={props.tintColor} size={20} />
-                  </TouchableOpacity>
-                </Link>
-              </View>
-            )
-          }
-        }}
-      />
     </ScrollView>
   )
 }
@@ -107,7 +92,9 @@ function ListButton(link: (typeof links)[0]) {
         }}
       >
         <Feather name={link.icon} color={elevatedOnbackgroundColor} size={20} />
-        <Text className="flex-1 text-gray-500 font-semibold">{link.name}</Text>
+        <Text className="flex-1 dark:text-white font-semibold">
+          {link.name}
+        </Text>
         <Feather
           name="chevron-right"
           color={elevatedOnbackgroundColor}

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Text } from 'react-native'
-import Animated, {
-  FadeInDown,
-  FadeOutDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming
-} from 'react-native-reanimated'
+import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated'
 
 interface SnackbarProps {
   duration?: number
@@ -15,8 +9,6 @@ interface SnackbarProps {
 
 const Snackbar = ({ duration = 3000, message }: SnackbarProps) => {
   const [visible, setVisible] = useState(false)
-  const opacity = useSharedValue(0)
-  const translateY = useSharedValue(50)
 
   useEffect(() => {
     if (message) {
@@ -28,21 +20,15 @@ const Snackbar = ({ duration = 3000, message }: SnackbarProps) => {
 
       return () => clearTimeout(timer)
     }
-  }, [message, opacity, translateY, duration])
-
-  const animatedStyles = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-    transform: [{ translateY: translateY.value }]
-  }))
+  }, [message, duration])
 
   return visible ? (
     <Animated.View
       entering={FadeInDown.duration(300)}
       exiting={FadeOutDown.duration(300)}
-      className="absolute bottom-5 left-5 right-5 rounded-md py-3 px-4 shadow-black shadow-md"
-      style={animatedStyles}
+      className="absolute bg-gray-800 dark:bg-gray-600 bottom-5 left-5 right-5 rounded-md p-4 shadow-black shadow-md"
     >
-      <Text className="text-white text-sm font-medium">{message}</Text>
+      <Text className="text-white text-base">{message}</Text>
     </Animated.View>
   ) : null
 }
