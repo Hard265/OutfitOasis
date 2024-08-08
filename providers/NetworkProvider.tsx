@@ -1,34 +1,39 @@
-import React, { createContext, useState, useEffect, PropsWithChildren } from 'react';
-import NetInfo from '@react-native-community/netinfo';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  PropsWithChildren
+} from 'react'
+import NetInfo from '@react-native-community/netinfo'
 
 interface NetworkContextType {
-  isConnected: boolean;
-  isInternetReachable: boolean;
+  isConnected: boolean | null
+  isInternetReachable: boolean | null
 }
 
-const NetworkContext = createContext<NetworkContextType>({
+export const NetworkContext = createContext<NetworkContextType>({
   isConnected: false,
-  isInternetReachable: false,
-});
+  isInternetReachable: false
+})
 
-const NetworkProvider({ children }: PropsWithChildren) => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [isInternetReachable, setIsInternetReachable] = useState(false);
+export function NetworkProvider({ children }: PropsWithChildren) {
+  const [status, setStatus] = useState<NetworkContextType>({
+    isConnected: false,
+    isInternetReachable: false
+  })
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
-      setIsConnected(state.isConnected);
-      setIsInternetReachable(state.isInternetReachable);
-    });
+      setStatus({
+        isConnected: state.isConnected,
+        isInternetReachable: state.isInternetReachable
+      })
+    })
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
   return (
-    <NetworkContext.Provider value={{ isConnected, isInternetReachable }}>
-      {children}
-    </NetworkContext.Provider>
-  );
-};
-
-export { NetworkContext, NetworkProvider };
+    <NetworkContext.Provider value={status}>{children}</NetworkContext.Provider>
+  )
+}
