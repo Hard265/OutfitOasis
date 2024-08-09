@@ -11,7 +11,7 @@ export default function App() {
         source={require('../assets/splash.png')}
         className="w-full h-64 mb-4"
       />
-      <Link href="/(app)/tabs/products" asChild>
+      <Link href="/(app)/(tabs)/products" asChild>
         <TouchableOpacity
           style={{
             borderRadius: 6,

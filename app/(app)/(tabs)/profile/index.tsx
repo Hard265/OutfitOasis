@@ -20,7 +20,7 @@ const links: {
   {
     name: 'Edit Profile',
     icon: 'edit-3',
-    href: '/(app)/tabs/profile/edit'
+    href: 'profile/edit'
   },
   {
     name: 'My Orders',

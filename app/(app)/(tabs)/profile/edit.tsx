@@ -35,24 +35,6 @@ export default function EditProfilePage() {
       contentContainerClassName="justify-center"
       className="flex-1 bg-white dark:bg-black p-4"
     >
-      <Tabs.Screen
-        options={{
-          headerLeft(props) {
-            return (
-              <Link href="./" asChild replace>
-                <TouchableOpacity>
-                  <Feather
-                    name="arrow-left"
-                    size={24}
-                    className="p-3"
-                    color={props.tintColor}
-                  />
-                </TouchableOpacity>
-              </Link>
-            )
-          }
-        }}
-      />
       <View>
         <Image
           source={require('@/assets/splash.png')}
@@ -113,7 +95,7 @@ export default function EditProfilePage() {
           <Text className="text-red-100 font-semibold">Save</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => router.replace('./')}
+          onPress={router.back}
           style={{
             flex: 1,
             borderRadius: 6,

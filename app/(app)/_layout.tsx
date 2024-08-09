@@ -1,5 +1,5 @@
 import { useSession } from '@/hooks/useSession'
-import { Redirect, Slot } from 'expo-router'
+import { Redirect, Slot, Stack } from 'expo-router'
 import { ActivityIndicator, View } from 'react-native'
 
 export default function Layout() {
@@ -19,5 +19,13 @@ export default function Layout() {
     return <Redirect href="/(auth)/login" />
   }
 
-  return <Slot />
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="checkout"
+        options={{ headerShown: false, animation: 'slide_from_right' }}
+      />
+    </Stack>
+  )
 }

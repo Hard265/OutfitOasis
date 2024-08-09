@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useTheme } from '@/hooks/useTheme'
+import { Iconify } from 'react-native-iconify'
 
 export default function TabsLayout() {
   const { backgroundColor, onbackgroundColor, isDark } = useTheme()
@@ -18,19 +19,13 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="products/index"
+        name="products"
         options={{
           title: 'Home',
+          headerShown: false, // Hide the header for the home screen
           tabBarIcon: (props) => (
             <Feather color={props.color} name="home" size={props.size} />
           )
-        }}
-      />
-      <Tabs.Screen
-        name="products/[id]"
-        options={{
-          title: 'Product details',
-          href: null
         }}
       />
 
@@ -66,33 +61,28 @@ export default function TabsLayout() {
       />
 
       <Tabs.Screen
-        name="orders/index"
+        name="orders"
         options={{
           title: 'Orders',
+          headerShown: false, // Hide the header for the orders screen
           tabBarIcon: (props) => (
-            <MaterialCommunityIcons
+            <Iconify
               color={props.color}
-              name="ticket-outline"
-              size={props.size}
+              icon="mynaui:shopping-bag"
+              size={props.size + 4}
             />
           )
         }}
       />
 
       <Tabs.Screen
-        name="profile/index"
+        name="profile"
         options={{
+          headerShown: false, // Hide the header for the profile screen
           title: 'Profile',
           tabBarIcon: (props) => (
             <Feather color={props.color} name="user" size={props.size} />
           )
-        }}
-      />
-      <Tabs.Screen
-        name="profile/edit"
-        options={{
-          title: 'Edit',
-          href: null
         }}
       />
     </Tabs>
